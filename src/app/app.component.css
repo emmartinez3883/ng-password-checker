@@ -1,0 +1,19 @@
+﻿.search-bar input {
+  line-height: 3;
+  width: 75%;
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.search-bar button {
+  font-size: larger;
+}
+
+.card-body {
+  text-align: center;
+  min-height: 200px;
+}
+
+.navbar {
+  padding: 0.5rem 0.5rem;
+}

@@ -1,0 +1,121 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <img class="navbar-brand" src="./assets/Logo.png" /><img class="navbar navbar-nav ml-auto" src="./assets/Logo2.png" />
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+<br />
+<div class="container">
+  <div class="jumbotron">
+    <h4 class="display-4">Has my password been compromised?</h4>
+    <p class="lead">Search among our database of more than half a billion passwords which have previously been exposed in data breaches.</p>
+    <form [formGroup]="pwdForm" (ngSubmit)="save(password.value)">
+      <div class="search-bar">
+        <div class="input-group mb-2">
+          <input #password aria-label="" type="password" formControlName="password" placeholder="password">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" [disabled]="!pwdForm.valid">Search</button>
+          </div>
+        </div>
+      </div>
+      <ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1"
+                   [speed]="100" [showSpinner]="false" [direction]="'leftToRightIncreased'"
+                   [color]="'#00bc8c'" [trickleSpeed]="250" [thick]="true" [ease]="'linear'"></ng-progress>
+    </form>
+    <p><em>This search tool is intended for reference purposes only.  Passwords entered into this site are not explicitly stored or collected in any way.</em></p>
+  </div>
+  <div class="alert alert-dismissible alert-danger" *ngIf="count > 0">
+    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+    <h4 class="alert-heading">Uh-oh!</h4>
+    <p class="lead">
+      This password has been seen <strong>{{ count }}</strong> times before.  You should seriously consider changing it...no, really...change it now!
+    </p>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #1</div>
+          <div class="card-body">
+            <p>
+            <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
+              </p>
+            <p class="card-text">Protect yourself using a password manager such as <a href="https://www.lastpass.com/" target="_blank">LastPass</a> and save strong passwords for every site you log into.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #2</div>
+          <div class="card-body">
+            <p>
+            <i class="fa fa-key fa-flip-horizontal fa-3x" aria-hidden="true"></i>
+            <i class="fa fa-key fa-3x" aria-hidden="true"></i>
+              </p>
+            <p class="card-text">Consider using multi-factor authentication for your accounts when available. (i.e. Google, Facebook, Apple, Duo)</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #3</div>
+          <div class="card-body">
+            <p>
+              <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i>
+            </p>
+            <p class="card-text">Be on the lookout for notifications of other breaches. Then check your password against this database and change it immediately if compromised.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-dismissible alert-success" *ngIf="count == 0">
+    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+    <h4 class="alert-heading">Phew!</h4>
+    <p class="lead">
+    This password wasn't found in our database.  Still, you should consider changing <strong>all</strong> of your passwords to be strong and unique.
+      </p>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #1</div>
+          <div class="card-body">
+            <p>
+              <i class="fa fa-lock fa-4x" aria-hidden="true"></i>
+            </p>
+            <p class="card-text">
+              Protect yourself using a password manager such as <a href="https://www.lastpass.com/" target="_blank">LastPass</a> and save strong passwords for every site you log into.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #2</div>
+          <div class="card-body">
+            <p>
+              <i class="fa fa-key fa-flip-horizontal fa-3x" aria-hidden="true"></i>
+              <i class="fa fa-key fa-3x" aria-hidden="true"></i>
+            </p>
+            <p class="card-text">Consider using multi-factor authentication for your accounts when available. (i.e. Google, Facebook, Apple, Duo)</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;">
+          <div class="card-header bg-primary">Security Tip #3</div>
+          <div class="card-body">
+            <p>
+              <i class="fa fa-exclamation-triangle fa-3x" aria-hidden="true"></i>
+            </p>
+            <p class="card-text">Be on the lookout for notifications of other breaches. Then check your password against this database and change it immediately if compromised.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-dismissible alert-warning" *ngIf="count < 0">
+    <!--<button type="button" class="close" data-dismiss="alert">&times;</button>-->
+    <h4 class="alert-heading">Woops!</h4>
+    <p class="mb-0">Something went wrong...maybe try again later?</p>
+  </div>
+</div>
